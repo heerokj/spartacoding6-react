@@ -1,0 +1,39 @@
+1. form에 있는 버튼 클릭 시 왜 새로고침 발생할까??
+
+form 태그는 ~~로 제출이 되는 태그이다.
+고유의 특성 : submit이라는 속성임 
+form태그에 submit을 주어서 이벤트 줘야함 그런데 
+컴포넌트에 type="submit" 주면 그 컴포넌트를 누르거나 뭐할때 submit이 일어남
+그런데!
+폼태그 안에 버튼은 기본적으로 submit 속성을 가짐 따라서 버튼을 클릭하기만 하면 
+새로고침이 발생한다.
+안 일어나게 하려면 type="button"으로 줘야됨
+
+
+
+2. map을 이용해서 그릴때는 리턴문에 key라는 속성을 넣어줘야함
+
+
+
+3. useState 는 함수라 생각하면 됨  "결과물"이 리턴됨
+여기서 결과물은 객체(배열)!
+const arr = useState(0);
+arr = {
+    count:0;
+    setCount : function(){}
+}
+이런 형태이다.
+
+따라서 이하로 작성할 수도 있는데 (대부분? 이렇게 작성함)
+const [count, setCount] = useState(0); // 구조분해할당
+
+
+
+4. 리액트 컴포넌트는 .js보다는 .jsx로 쓰기 => 개발자들 사이의 협업을 위해 ㅎㅎ
+쟉스를 사용하면 이제 createElement(), document.querySelector(), addEventListener()..등 웬만하면 안써도 됨.
+
+
+
+5. ** 리액트는 state 변경을 감지해서 화면을 "다시 렌더링"을 한다!!!! -> 화면의 요소를 다시 그린거
+==> 리액트는 상태 관리가 가장 중요
+

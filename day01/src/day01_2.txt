@@ -1,0 +1,24 @@
+import React, { useState } from 'react'
+
+const App = () => {
+
+  //1) 일반 배열
+  //2) 객체로 이루어진 배열
+  const 초기값 = ["고양이", "강아지", "고슴도치", "팬더", "토끼"];
+  const [동물들, set동물들] = useState(초기값);
+
+
+  return (
+    <div>
+      <h2>동물 리스트</h2>
+      {/* map은 리턴값이 있으니까 쓰는거야 foreach는 리턴값이 없잖아 */}
+      {동물들.filter((동물)=> 동물 != "고양이")
+      .map(function(동물){
+        //return 동물+ " "; // 가공된게 들어간다.
+        return <div key={동물}>{동물}</div>
+      })}
+    </div>
+  )
+}
+
+export default App

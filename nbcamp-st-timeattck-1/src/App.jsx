@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from "./components/Header";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
@@ -7,28 +8,32 @@ const App = () => {
   const [newSilver, setSilver] = useState(0);
   const [newBronze, setBronze] = useState(0);
 
+  const addCountries = (e) => {
+    e.preventDefault();
+
+    if (!newName) {
+      alert("국가를 입력해주세요");
+      return;
+    }
+
+    const addCountries = [
+      ...countries,
+      {
+        id: new Date().getTime(),
+        name: newName,
+        gold: Number(newGold),
+        silver: Number(newSilver),
+        bronze: Number(newBronze),
+      },
+    ];
+    const sortAddCountries = addCountries.sort((a, b) => b.gold - a.gold);
+    setCountries(sortAddCountries);
+  };
+
   return (
     <div>
-      <h1>2024 파리 올림픽</h1>
-      <form
-        onSubmit={function (e) {
-          e.preventDefault();
-          const addCountries = [
-            ...countries,
-            {
-              id: new Date().getTime(),
-              name: newName,
-              gold: Number(newGold),
-              silver: Number(newSilver),
-              bronze: Number(newBronze),
-            },
-          ];
-
-          // const sortAddCountries = addCountries
-
-          setCountries(addCountries);
-        }}
-      >
+      <Header></Header>
+      <form onSubmit={addCountries}>
         <div>
           <label>국가명</label>
           <input
@@ -84,12 +89,16 @@ const App = () => {
               //다시 map이용
               const updateCountries = countries.map(function (country) {
                 //
-                return {
-                  ...country,
-                  gold: Number(newGold),
-                  silver: Number(newSilver),
-                  bronze: Number(newBronze),
-                };
+                if (targetUpdateCountry.name === country.name) {
+                  return {
+                    ...country,
+                    gold: Number(newGold),
+                    silver: Number(newSilver),
+                    bronze: Number(newBronze),
+                  };
+                } else {
+                  return country;
+                }
               });
 
               setCountries(updateCountries);

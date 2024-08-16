@@ -16,6 +16,15 @@ const App = () => {
       return;
     }
 
+    const targetCountry = countries.find(function (country) {
+      return country.name === newName;
+    });
+
+    if (targetCountry) {
+      alert("이미 등록된 국가입니다.");
+      return;
+    }
+
     const addCountries = [
       ...countries,
       {
@@ -82,13 +91,16 @@ const App = () => {
               e.preventDefault();
               //업데이트 할 대상 찾기
               const targetUpdateCountry = countries.find(function (update) {
-                return (update.name = newName);
+                return update.name === newName;
               });
-              console.log(targetUpdateCountry);
+
+              if (!targetUpdateCountry) {
+                alert("등록되지 않은 국가입니다.");
+                return;
+              }
 
               //다시 map이용
               const updateCountries = countries.map(function (country) {
-                //
                 if (targetUpdateCountry.name === country.name) {
                   return {
                     ...country,
@@ -101,7 +113,12 @@ const App = () => {
                 }
               });
 
-              setCountries(updateCountries);
+              //정렬
+              const sortUpdateCountries = updateCountries.sort(
+                (a, b) => b.gold - a.gold
+              );
+
+              setCountries(sortUpdateCountries);
             }}
           >
             업데이트

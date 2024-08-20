@@ -1,29 +1,26 @@
-// src/SokSae.js
+import React from "react";
+import { useEffect } from "react";
+import { useRef } from "react";
 
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// 홈페이지 로딩 시 아이디에 포커싱을 주고싶다면 => 아이디 인풋을 useRef로 담은다음 포커싱을 주면 됨(즉, 최초렌더링이 될때 포커싱)
+// ref = {idRef} 로 연결!!!
+const App = () => {
+  const idRef = useRef("");
 
-const 속세 = () => {
-  const nav = useNavigate();
-
+  //최초 렌더링시에만
   useEffect(() => {
-    //clean up 함수
-    return () => {
-      console.log(
-        "안녕히 계세요 여러분! 전 이 세상의 모든 굴레와 속박을 벗어 던지고 제 행복을 찾아 떠납니다! 여러분도 행복하세요~~!"
-      );
-    };
+    idRef.current.focus();
   }, []);
-
   return (
-    <button
-      onClick={() => {
-        nav("/todos");
-      }}
-    >
-      속세를 벗어나는 버튼
-    </button>
+    <div>
+      <div>
+        아이디 : <input type="text" ref={idRef} />
+      </div>
+      <div>
+        비밀번호 : <input type="password" />
+      </div>
+    </div>
   );
 };
 
-export default 속세;
+export default App;
